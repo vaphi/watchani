@@ -1,0 +1,14 @@
+<div>
+  <p>Teesting</p>
+  <button (click)="animelist()"> test</button>
+</div>
+<div class="card" *ngIf="anime" id=movieCards>
+    <img class="card-img-top" alt="poster" src= {{anime.coverImage.extraLarge}}>
+    <div class="card-body">
+      <a [routerLink]="['/animeSearch', anime.id]"> <h4>{{anime.title.english}}</h4></a>
+      <p>{{anime.title.romaji}}</p>
+      <p>{{anime.summary}}</p>
+      <p>Tags: {{anime.genres}}</p>
+      <pm-star [rating]='anime.avgScore'></pm-star>
+    </div>
+  </div>

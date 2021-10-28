@@ -1,0 +1,7 @@
+<div class="crop"
+     [title]="rating"
+     (click)="onClick()">
+    <div class="progress">
+        <div class="progress-bar {{barColor}}" role="progressbar" [style.width.%]="ratingPercent" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{rating}}</div>
+      </div>
+  </div>
