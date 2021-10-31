@@ -1,41 +1,92 @@
 .nav-container {
-	background-color: #1d1e22;
-	padding:5px;
+    background-color: #1d1e22;
+    padding: 5px;
 }
 
-.nav-container h1{
-	color: white;
+.nav-container h1 {
+    color: white;
 }
 
-.nav-container input{
-	background-color: white;
-	margin-top: 14px;
-	float: right;
+.nav-container input {
+    background-color: white;
+    margin-top: 14px;
+    float: right;
 }
 
-.search-container input{
-    padding-left:5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    width: 100%;
-    font-size: 20px;
+.search-container {
+    input {
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+        font-size: 20px;
+    }
+
+    .search-bar {
+        margin: 0.5% 2%;
+    }
 }
 
-.container{
+.container {
     flex-wrap: wrap;
 }
 
-.movieResultsContainer {
-  padding: 25px;
-  margin: auto;
-  list-style: none;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: center;
+.movie-results-container {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    overflow-y: scroll;
+    margin: 1% 2%;
 
-}
+    .card-container {
+        display: flex;
+        flex-direction: row;
 
-#movieCards {
-    max-width: 300px;
-    margin-right: 50px;
+        .cover-card-container {
+            margin: auto;
+            padding: 1%;
+
+            .cover-card {
+                .card-img-top {
+                    min-width: 100px;
+                    max-width: 100px;
+                }
+            }
+        }
+
+        .card-body {
+            margin: 0 2%;
+
+            .card-summary {
+                .summary {
+                    display: -webkit-box;
+                    max-width: 100%;
+                    margin: 0 auto;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+
+        .card-ratings {
+            margin: auto;
+            padding: 1%;
+
+            .rating-container {
+                .score-container {
+                    text-align: center;
+                    padding-bottom: 25%;
+                }
+
+                .view-detail-button {
+                    button {
+                        width: 150px;
+                        max-width: 150px;
+                    }
+                }
+            }
+        }
+    }
 }

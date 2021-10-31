@@ -1,26 +1,49 @@
 <div class="search-container">
-  <div class="row">
-    <div class="col-sm" style="padding-right: 0">
+  <div class="search-bar">
+    <div class="search">
       <!-- <input className="search-bar" placeholder="Please enter movie name" [(ngModel)]="searchValue" (ngModelChange)="searchValue = $event"> -->
       <input className="search-bar" placeholder="Please enter anime name"
         (input)=(searchChangeHandler($event.target.value)) value="">
     </div>
   </div>
-  <div class="movieResultsContainer">
-    <div class="card" *ngFor="let anime of animes" id=movieCards>
-      <img id="poster-img" class="card-img-top" alt="poster" [routerLink]="['/animeSearch', anime.id]"
-        src={{anime.coverImage.large}}>
+  <div class="movie-results-container">
+    <div class="card card-container" *ngFor="let anime of animes" id=movieCards>
+      <div class="cover-card-container">
+        <div class="cover-card">
+          <img id="poster-img" class="card-img-top" alt="poster" [routerLink]="['/animeSearch', anime.id]"
+            src={{anime.coverImage.large}}>
+        </div>
+      </div>
       <div class="card-body">
-        <a [routerLink]="['/animeSearch', anime.id]">
-          <h4>{{anime.title.english}}</h4>
-        </a>
-        <p>{{anime.title.romaji}}</p>
-        <p>{{anime.summary}}</p>
-        <p>Tags: {{anime.genres}}</p>
-        <pm-bar [rating]='anime.avgScore'></pm-bar>
-        <button class="btn btn-primary" [routerLink]="['/animeSearch', anime.id]">View </button>
+        <div class="card-title">
+          <a [routerLink]="['/animeSearch', anime.id]">
+            <h4>{{anime.title.english}}</h4>
+          </a>
+          <a [routerLink]="['/animeSearch', anime.id]">
+            <p>{{anime.title.romaji}}</p>
+          </a>
+
+        </div>
+        <div class="card-summary">
+          <p class="summary">{{anime.summary}}</p>
+          <p>Tags: {{anime.genres}}</p>
+          <pm-bar [rating]='anime.avgScore'></pm-bar>
+        </div>
+      </div>
+      <div class="card-ratings">
+        <div class="rating-container">
+          <div class="score-container">
+            {{anime.avgScore}}
+          </div>
+          <div class="view-detail-button">
+            <button class="btn btn-primary" [routerLink]="['/animeSearch', anime.id]">View </button>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="paginator">
+    
   </div>
 </div>
 <!-- <button (click)="animesSearch()"> test</button> -->
