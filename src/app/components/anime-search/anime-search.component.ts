@@ -24,21 +24,21 @@ export class AppMovieSearchComponent implements OnInit {
   }
 
   constructor(private httpClient: HttpClient,
-              private movieSearchService: MovieService) { }
+    private movieSearchService: MovieService) { }
 
   animesSearch(searchTerm) {
     this.animes = this.movieSearchService.getAnimes(this.searchTerm).subscribe((res: any) => {
 
       this.animes = res.data.Page.media;
 
-      if(this.animes.length > 0){
+      if (this.animes.length > 0) {
         this.animes.forEach((anime) => {
           // tslint:disable-next-line:max-line-length
           anime.summary = anime.description ? anime.description.replace(/(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)/g, '') : "";
           anime.avgScore = (anime.averageScore / 10);
-      });
+        });
       }
-  });
+    });
   }
 
   animeSearchID(id: number) {

@@ -7,6 +7,7 @@ import { AppMovieSearchComponent } from './components/anime-search/anime-search.
 import { MovieService } from './components/anime-services/movie.Search.service';
 import { MovieDetailsGuard } from './components/anime-shared/movie.details.component.guard';
 import { ConvertToSpacesPipe } from './convert-to-space-pipe';
+import { SharedModule } from './shared.modules';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ConvertToSpacesPipe } from './convert-to-space-pipe';
     ],
     imports: [
       BrowserModule,
+      SharedModule,
       RouterModule.forChild([
         { path: 'animeSearch', component: AppMovieSearchComponent},
         { path: 'animeSearch/:id',

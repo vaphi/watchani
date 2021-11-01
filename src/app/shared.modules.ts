@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { StarRatingComponent } from './components/anime-shared/star-rating-components/star-rating.component';
 import { BarRatingComponent } from './components/anime-shared/bar-rating-components/bar-rating.component';
 import { HttpClientModule } from '@angular/common/http'
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http'
   exports: [
     BarRatingComponent,
     StarRatingComponent,
+    MatPaginatorModule,
     CommonModule,
     FormsModule
   ]

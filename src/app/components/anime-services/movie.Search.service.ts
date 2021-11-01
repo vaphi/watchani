@@ -20,7 +20,7 @@ export class MovieService {
     getAnimes(inputSearch: string) {
         let animes: any;
         const query = `query($search: String){
-            Page () {
+            Page (page: 1) {
               pageInfo {
                 total
                 currentPage
