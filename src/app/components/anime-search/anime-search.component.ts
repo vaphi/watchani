@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { isNil } from 'lodash';
 
 @Component({
   templateUrl: './anime-search.html',
@@ -17,7 +18,7 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
 
   public searchSub$ = new Subject<string>();
 
-  isLoadingResults = true;
+  isLoading = false;
   resultsLength = 0;
 
   title = 'MovieDB';
@@ -46,7 +47,7 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
 
     this.dataSource.data = this.animes;
     this.dataSource.paginator = this.paginator;
-    this.paginator.pageSize = 30;
+    this.paginator.pageSize = 20;
   }
 
   ngOnDestroy(): void {
@@ -60,7 +61,14 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
   constructor(private httpClient: HttpClient,
     private movieSearchService: MovieService) { }
 
+  getRating(score: any): any {
+
+    return score === 0 ? "No Rating" : score;
+  }
+
   async animesSearch() {
+
+    this.isLoading = true;
 
     const data = await this.movieSearchService.getAnimePages(this.searchTerm);
 
@@ -76,8 +84,19 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
       this.animes = data.media;
     }
 
+    this.animes.forEach((anime: any) => {
+      // tslint:disable-next-line:max-line-length
+      if (!isNil(anime.description)) {
+        anime.description = anime.description.replace(/(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)/gm, '');
+      }
+
+      anime.avgScore = (anime.averageScore / 10);
+    });
+
     this.dataSource.data = this.animes;
     this.resultsLength = this.animes.length;
+
+    this.isLoading = false;
   }
 
   private async getAnime(page: number) {
@@ -88,5 +107,4 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
     this.movie = this.movieSearchService.getAnimeByID(567);
     console.log(this.movie);
   }
-
 }

@@ -1,9 +1,5 @@
-<div>
-  <p>Teesting</p>
-  <button (click)="animelist()"> test</button>
-</div>
 <div class="card" *ngIf="anime" id=movieCards>
-    <img class="card-img-top" alt="poster" src= {{anime.coverImage.extraLarge}}>
+    <img class="detail-anime-cover" alt="poster" src= {{anime.coverImage.extraLarge}}>
     <div class="card-body">
       <a [routerLink]="['/animeSearch', anime.id]"> <h4>{{anime.title.english}}</h4></a>
       <p>{{anime.title.romaji}}</p>

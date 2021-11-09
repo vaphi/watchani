@@ -1,17 +1,16 @@
- <div class="nav-container">
-    <div class="header">
-      <div class="col-sm">
-      <div class="col-md-center">
-      <h1>{{title}}</h1>
-      </div>
-      <div class="col-sm">
-  </div>
-  <nav class='navbar navbar-expand navbar-light bg-light'>
-      <a class='navbar-brand'>{{pageTitle}}</a>
+<div class="nav-container">
+  <div class="nav-bar-section">
+    <div class="title-container">
+      <span class="title-first">{{firstTitle}}</span> <span class="title-second">{{secondTitle}}</span>
+    </div>
+    <div class="col-sm">
+    </div>
+    <nav class='navbar navbar-expand navbar-light bg-light'>
       <ul class='nav nav-pills'>
         <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/home']">Home</a></li>
         <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/animeSearch']">Search</a></li>
+        <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/animeSearch/98488']">test</a></li>
       </ul>
-  </nav>
-  <div class='container'>
+    </nav>
   </div>
+</div>

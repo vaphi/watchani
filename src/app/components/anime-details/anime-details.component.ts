@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  templateUrl: './anime-details.component.html',
+  templateUrl: './anime-details.html',
   styleUrls: ['./anime-details.component.scss']
 })
 

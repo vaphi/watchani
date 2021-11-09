@@ -6,6 +6,7 @@ import { BarRatingComponent } from './components/anime-shared/bar-rating-compone
 import { HttpClientModule } from '@angular/common/http'
 import { MatPaginatorModule } from '@angular/material/paginator/';
 import { MatTableModule } from '@angular/material/table';
+import { LoadingIconComponent } from './components/anime-shared/loading-icon/loading-icon.component';
 
 @NgModule({
   imports: [
@@ -15,10 +16,12 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [
     StarRatingComponent,
     BarRatingComponent,
+    LoadingIconComponent
   ],
   exports: [
     BarRatingComponent,
     StarRatingComponent,
+    LoadingIconComponent,
     MatPaginatorModule,
     CommonModule,
     FormsModule,

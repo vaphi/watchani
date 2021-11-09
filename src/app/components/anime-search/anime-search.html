@@ -55,54 +55,55 @@
 
   <div class="anime-grid mat-elevation-z8">
 
-    <ng-template>
-      
-    </ng-template>
-    <ng-container>
-      <div class="anime-table-container">
-
-        <table mat-table [dataSource]="dataSource" class="anime-table" matSort matSortActive="created"
-          matSortDisableClear matSortDirection="desc">
-          <!-- Number Column -->
-          <ng-container matColumnDef="cover">
-            <th class="grid-header-column" mat-header-cell *matHeaderCellDef></th>
-            <td class="anime-cover" mat-cell *matCellDef="let row"><img class="card-img-top" id="poster-img"
-                alt="poster" [routerLink]="['/animeSearch', row.id]" src={{row.coverImage.large}}></td>
-          </ng-container>
-
-          <!-- Title Column -->
-          <ng-container matColumnDef="desc">
-            <th class="grid-header-column desc" mat-header-cell *matHeaderCellDef>Description</th>
-            <td class="anime-desc" mat-cell *matCellDef="let row">
-              <div class="anime-desc-container">
-                <div class="card-title">
-                  <a [routerLink]="['/animeSearch', row.id]">
-                    <h2 class="main-title">{{row.title.english}}</h2>
-                  </a>
-                  <a [routerLink]="['/animeSearch', row.id]">
-                    <p>{{row.title.romaji}}</p>
-                  </a>
-
-                </div>
-                <div class="card-summary">
-                  <p class="summary">{{row.summary}}</p>
-                  <p>Tags: {{row.genres}}</p>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-
-          <!-- State Column -->
-          <ng-container matColumnDef="rating">
-            <th class="grid-header-column rating" mat-header-cell *matHeaderCellDef>Rating</th>
-            <td class="anime-rating" mat-cell *matCellDef="let row">{{row.avgScore}}</td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+    <div *ngIf="isLoading" class="table-loading-container">
+      <div class="loading-spinner">
+        <app-loading></app-loading>
       </div>
-    </ng-container>
+    </div>
+
+    <div *ngIf="!isLoading" class="anime-table-container">
+
+      <table mat-table [dataSource]="dataSource" class="anime-table" matSort matSortActive="created" matSortDisableClear
+        matSortDirection="desc">
+        <!-- Number Column -->
+        <ng-container matColumnDef="cover">
+          <th class="grid-header-column" mat-header-cell *matHeaderCellDef></th>
+          <td class="anime-cover" mat-cell *matCellDef="let row"><img class="card-img-top" id="poster-img" alt="poster"
+              [routerLink]="['/animeSearch', row.id]" src={{row.coverImage.large}}></td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="desc">
+          <th class="grid-header-column desc" mat-header-cell *matHeaderCellDef>Description</th>
+          <td class="anime-desc" mat-cell *matCellDef="let row">
+            <div class="anime-desc-container">
+              <div class="card-title">
+                <a [routerLink]="['/animeSearch', row.id]">
+                  <h2 class="main-title">{{row.title.english}}</h2>
+                </a>
+                <a [routerLink]="['/animeSearch', row.id]">
+                  <p>{{row.title.romaji}}</p>
+                </a>
+
+              </div>
+              <div class="card-summary">
+                <p class="summary">{{row.description}}</p>
+                <p>Tags: {{row.genres}}</p>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- State Column -->
+        <ng-container matColumnDef="rating">
+          <th class="grid-header-column rating" mat-header-cell *matHeaderCellDef>Rating</th>
+          <td class="anime-rating" mat-cell *matCellDef="let row">{{getRating(row.avgScore)}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
 
     <mat-paginator [showFirstLastButtons]="true" [pageSizeOptions]="[10, 20, 30, 40, 50]" [length]="resultsLength"
       aria-label="Select page of GitHub search results">
