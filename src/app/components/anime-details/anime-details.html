@@ -1,10 +1,31 @@
-<div class="card" *ngIf="anime" id=movieCards>
-    <img class="detail-anime-cover" alt="poster" src= {{anime.coverImage.extraLarge}}>
-    <div class="card-body">
-      <a [routerLink]="['/animeSearch', anime.id]"> <h4>{{anime.title.english}}</h4></a>
-      <p>{{anime.title.romaji}}</p>
-      <p>{{anime.summary}}</p>
-      <p>Tags: {{anime.genres}}</p>
-      <pm-star [rating]='anime.avgScore'></pm-star>
+<div class="detail-container" *ngIf="anime">
+  <div class="left-side">
+    <div class="anime-cover">
+      <img class="detail-anime-cover" alt="poster" src={{anime.coverImage.extraLarge}}>
+    </div>
+    <div class="alt-anime-name">
+
+    </div>
+    <div class="anime-info">
+
     </div>
   </div>
+
+  <div class="right-side">
+    <div class="anime-header">
+      <div class="anime-titles">
+        <h4>{{anime.title.english}}</h4>
+        <p>{{anime.title.romaji}}</p>
+      </div>
+      <div class="anime-rating">
+        {{anime.averageScore}}
+      </div>
+    </div>
+    <div class="anime-summary">
+      <p>{{anime.description}}</p>
+    </div>
+    <div class="anime-charactors">
+
+    </div>
+  </div>
+</div>

@@ -136,26 +136,63 @@ export class MovieService {
 
     getAnimeByID(searchID: number) {
         const query = `query($id: Int){
-              Media (id: $id) {
+            Media(id: $id) {
                 id
-      			status
-      			averageScore
-      			episodes
+                averageScore
+                season
+                seasonYear
+                status
+                episodes
                 type
+                volumes
+                chapters
                 genres
+                description
+                status
+                characters {
+                  nodes {
+                    id
+                    dateOfBirth {
+                      year
+                      month
+                      day
+                    }
+                    name {
+                      first
+                      middle
+                      last
+                      full
+                      native
+                      userPreferred
+                    }
+                    gender
+                    image {
+                      large
+                      medium
+                    }
+                  }
+                }
+                startDate {
+                  year
+                  month
+                  day
+                }
+                endDate {
+                  year
+                  month
+                  day
+                }
                 title {
-                  english,
-                  native,
+                  english
+                  native
                   romaji
                 }
-      			description
-      			status
-      			coverImage {
-      			extraLarge
-      			large
-      			medium
-      			color
-      			}
+                coverImage {
+                  extraLarge
+                  large
+                  medium
+                  color
+                }
               }
             }`;
         const variables = {

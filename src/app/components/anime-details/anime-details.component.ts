@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../anime-services/movie.Search.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AnimeDetailsModel } from './model/anime-detail.model';
 
 @Component({
   templateUrl: './anime-details.html',
@@ -11,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class AnimeDetailsComponent implements OnInit, OnDestroy {
   movieTitle: string = 'blank';
-  anime: any;
+  anime: AnimeDetailsModel;
   aniID: any;
   param: any;
   mysub: Subscription;
@@ -27,9 +28,9 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy {
       console.log('Response: ' + res.data.Media);
       this.anime = res.data.Media;
       // tslint:disable-next-line:max-line-length
-      this.anime.avgScore = (this.anime.averageScore / 10);
+      this.anime.averageScore = (this.anime.averageScore / 10);
       // tslint:disable-next-line:max-line-length
-      this.anime.summary = this.anime.description.replace(/(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)/g, '');
+      this.anime.description = this.anime.description.replace(/(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)/g, '');
   });
 
     console.log("routeParams" + JSON.stringify(routeParams.id));
