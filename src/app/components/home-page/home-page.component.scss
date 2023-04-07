@@ -1,0 +1,41 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.backlog-container {
+    margin: auto;
+
+    .title-backlog {
+        h2 {
+            text-transform: uppercase;
+        }
+    }
+}
+.backlog-items-container {
+    text-align: center;
+    ul {
+        padding: unset;
+        display: inline-block;
+        text-align: left;
+    }
+}
+
+.update-container {
+    margin: auto;
+
+    .title-update {
+        h2 {
+            text-transform: uppercase;
+        }
+    }
+}
+.update-items-container {
+    text-align: center;
+    ul {
+        padding: unset;
+        display: inline-block;
+        text-align: left;
+    }
+}

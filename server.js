@@ -6,6 +6,7 @@
 
     // Serve only the static files form the dist directory
     app.use(express.static(__dirname + '/dist/watchani'));
+    app.use(cors());
 
     app.get('/*', function(req,res) {
         

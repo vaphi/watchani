@@ -1,54 +1,10 @@
-<!-- <div class="search-container">
-  <div class="search-bar">
-    <div class="search">
-      <input className="search-bar" placeholder="Please enter anime name"
-        (input)=(searchChangeHandler($event.target.value)) value="">
-    </div>
-  </div>
-  <div class="movie-results-container">
-    <div class="card card-container" *ngFor="let anime of animes" id=movieCards>
-      <div class="cover-card-container">
-        <div class="cover-card">
-          <img id="poster-img" class="card-img-top" alt="poster" [routerLink]="['/animeSearch', anime.id]"
-            src={{anime.coverImage.large}}>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">
-          <a [routerLink]="['/animeSearch', anime.id]">
-            <h4>{{anime.title.english}}</h4>
-          </a>
-          <a [routerLink]="['/animeSearch', anime.id]">
-            <p>{{anime.title.romaji}}</p>
-          </a>
-
-        </div>
-        <div class="card-summary">
-          <p class="summary">{{anime.summary}}</p>
-          <p>Tags: {{anime.genres}}</p>
-        </div>
-      </div>
-      <div class="card-ratings">
-        <div class="rating-container">
-          <div class="score-container">
-            {{anime.avgScore}}
-          </div>
-          <div class="view-detail-button">
-            <button class="btn btn-primary" [routerLink]="['/animeSearch', anime.id]">View </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="paginator">
-    <mat-paginator></mat-paginator>
-  </div>
-</div> -->
-
 <div class="search-container">
   <div class="search-bar">
+    <div class="search-button">
+      <button mat-raised-button (click)="animesSearch()">Search</button>
+    </div>
     <div class="search">
-      <input className="search-bar" placeholder="Please enter anime name" (input)=searchSub$.next($event.target.value)
+      <input className="search-bar" placeholder="Please enter anime name" (change)="searchChange($event)" (keydown.enter)="onEnterSearch($event)"
         value="">
     </div>
   </div>

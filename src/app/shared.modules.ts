@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http'
 import { MatPaginatorModule } from '@angular/material/paginator/';
 import { MatTableModule } from '@angular/material/table';
 import { LoadingIconComponent } from './components/anime-shared/loading-icon/loading-icon.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    MatButtonModule
   ],
   declarations: [
     StarRatingComponent,
@@ -25,7 +27,8 @@ import { LoadingIconComponent } from './components/anime-shared/loading-icon/loa
     MatPaginatorModule,
     CommonModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule,
   ]
 })
 export class SharedModule { }

@@ -34,24 +34,23 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnInit(): void {
 
-    this.searchSub$.pipe(
-      debounceTime(500), // discard emitted values that take less than the specified time between output
-      distinctUntilChanged() // only emit when value has changed
-    ).subscribe(word => {
-      this.searchTerm = word;
-      this.animesSearch();
-    });
+    // this.searchSub$.pipe(
+    //   debounceTime(500), // discard emitted values that take less than the specified time between output
+    //   distinctUntilChanged() // only emit when value has changed
+    // ).subscribe(word => {
+    //   this.searchTerm = word;
+    // });
   }
 
   ngAfterViewInit(): void {
 
     this.dataSource.data = this.animes;
     this.dataSource.paginator = this.paginator;
-    this.paginator.pageSize = 20;
+    this.paginator.pageSize = 25;
   }
 
   ngOnDestroy(): void {
-    this.searchSub$.unsubscribe();
+    // this.searchSub$.unsubscribe();
   }
 
   initGrid(): boolean {
@@ -72,17 +71,17 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
 
     const data = await this.movieSearchService.getAnimePages(this.searchTerm);
 
-    if (data.pageInfo.total > 50) {
-      this.animes = data.media;
+    // if (data.pageInfo.total > 50) {
+    //   this.animes = data.media;
 
-      for (let i = 2; i <= data.pageInfo.lastPage; i++) {
+    //   for (let i = 2; i <= data.pageInfo.lastPage; i++) {
 
-        const data = await this.getAnime(i);
-        this.animes = this.animes.concat(data.media);
-      }
-    } else {
+    //     const data = await this.getAnime(i);
+    //     this.animes = this.animes.concat(data.media);
+    //   }
+    // } else {
       this.animes = data.media;
-    }
+    // }
 
     this.animes.forEach((anime: any) => {
       // tslint:disable-next-line:max-line-length
@@ -97,6 +96,18 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
     this.resultsLength = this.animes.length;
 
     this.isLoading = false;
+  }
+
+  searchChange(event: any) {
+
+    if(event){
+      this.searchTerm = event.target.value
+    }
+  }
+
+  onEnterSearch(event: any) {
+
+    this.animesSearch();
   }
 
   private async getAnime(page: number) {

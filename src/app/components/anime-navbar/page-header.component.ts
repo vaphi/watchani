@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 
 export class NavBarComponent {
-  firstTitle = 'Search';
-  secondTitle = 'Ani';
+  firstTitle = 'Ani';
+  secondTitle = 'Info';
 }

@@ -17,7 +17,7 @@ export class MovieService {
         this.searchinputSource.next(input);
     }
 
-    getAnimes(inputSearch: string, page?: number) {
+    async getAnimes(inputSearch: string, page?: number) {
         let animes: any;
         const query = `query($search: String, $page: Int){
             Page (page: $page) {
