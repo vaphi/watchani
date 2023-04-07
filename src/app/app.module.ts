@@ -7,7 +7,7 @@ import { SharedModule } from './shared.modules';
 import { AnimeSearchModule } from './anime-search.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { RouterModule } from '@angular/router';
-import { MovieService } from './components/anime-services/movie.Search.service';
+import { AnimeService } from './components/anime-services/anime-search.service';
 import { NavBarComponent } from './components/anime-navbar/page-header.component';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,7 +33,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AnimeSearchModule,
     BrowserAnimationsModule,
   ],
-  providers: [MovieService],
+  providers: [AnimeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

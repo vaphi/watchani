@@ -6,7 +6,7 @@ import { throwError, BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 })
 
-export class MovieService {
+export class AnimeService {
     private searchinputSource = new BehaviorSubject('blank');
     currentSearchInput = this.searchinputSource.asObservable();
 

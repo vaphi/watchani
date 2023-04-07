@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MovieService } from '../anime-services/movie.Search.service';
+import { AnimeService } from '../anime-services/anime-search.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { isNil } from 'lodash';
   styleUrls: ['./anime-search.component.scss']
 })
 
-export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -21,13 +21,13 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
   isLoading = false;
   resultsLength = 0;
 
-  title = 'MovieDB';
+  title = 'AnimeDB';
   errorMessage = '';
   animes: any = [];
 
   displayedColumns: string[] = ['cover', 'desc', 'rating'];
 
-  private movie: any;
+  private anime: any;
   private searchTerm: string;
 
   dataSource = new MatTableDataSource<any>();
@@ -58,7 +58,7 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   constructor(private httpClient: HttpClient,
-    private movieSearchService: MovieService) { }
+    private animeSearchService: AnimeService) { }
 
   getRating(score: any): any {
 
@@ -69,7 +69,7 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
 
     this.isLoading = true;
 
-    const data = await this.movieSearchService.getAnimePages(this.searchTerm);
+    const data = await this.animeSearchService.getAnimePages(this.searchTerm);
 
     // if (data.pageInfo.total > 50) {
     //   this.animes = data.media;
@@ -111,11 +111,11 @@ export class AppMovieSearchComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private async getAnime(page: number) {
-    return await this.movieSearchService.getAnimePages(this.searchTerm, page);
+    return await this.animeSearchService.getAnimePages(this.searchTerm, page);
   }
 
   animeSearchID(id: number) {
-    this.movie = this.movieSearchService.getAnimeByID(567);
-    console.log(this.movie);
+    this.anime = this.animeSearchService.getAnimeByID(567);
+    console.log(this.anime);
   }
 }

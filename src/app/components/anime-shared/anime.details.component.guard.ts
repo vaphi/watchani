@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
         providedIn: 'root'
 })
 
-export class MovieDetailsGuard implements CanActivate {
+export class AnimeDetailsGuard implements CanActivate {
 
     constructor(private router: Router) {}
 
@@ -15,8 +15,8 @@ export class MovieDetailsGuard implements CanActivate {
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
             const id = +next.url[1].path;
             if (isNaN(id) || id < 1) {
-                alert('Invalid movie Id');
-                this.router.navigate(['/movieSearch']);
+                alert('Invalid anime Id');
+                this.router.navigate(['/animeSearch']);
                 return false;
               }
             return true;
