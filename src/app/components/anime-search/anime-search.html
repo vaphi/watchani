@@ -4,7 +4,7 @@
       <button mat-raised-button (click)="animesSearch()">Search</button>
     </div>
     <div class="search">
-      <input className="search-bar" placeholder="Please enter anime name" (change)="searchChange($event)" (keydown.enter)="onEnterSearch($event)"
+      <input #searchInput className="search-bar" placeholder="Please enter anime name" (change)="searchChange($event)" (keydown.enter)="onEnterSearch($event)"
         value="">
     </div>
   </div>

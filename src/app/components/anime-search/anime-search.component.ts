@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AnimeService } from '../anime-services/anime-search.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,7 +15,7 @@ import { isNil } from 'lodash';
 export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild('searchInput') searchInput: ElementRef;
   public searchSub$ = new Subject<string>();
 
   isLoading = false;
@@ -80,7 +80,7 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
     //     this.animes = this.animes.concat(data.media);
     //   }
     // } else {
-      this.animes = data.media;
+    this.animes = data.media;
     // }
 
     this.animes.forEach((anime: any) => {
@@ -100,13 +100,16 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
 
   searchChange(event: any) {
 
-    if(event){
+    if (event) {
       this.searchTerm = event.target.value
     }
   }
 
   onEnterSearch(event: any) {
 
+    if (this.searchInput) {
+      this.searchTerm = this.searchInput.nativeElement.value;
+    }
     this.animesSearch();
   }
 
