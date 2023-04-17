@@ -3,48 +3,105 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AnimeService } from '../anime-services/anime-search.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AnimeDetailsModel } from './model/anime-detail.model';
+import { AnimeDetailsModel, Studios } from './model/anime-detail.model';
+import { isEmpty, map } from 'lodash';
 
 @Component({
   templateUrl: './anime-details.html',
-  styleUrls: ['./anime-details.component.scss']
+  styleUrls: ['./anime-details.component.scss'],
 })
-
 export class AnimeDetailsComponent implements OnInit, OnDestroy {
   animeTitle: string = 'blank';
   anime: AnimeDetailsModel;
   aniID: any;
   param: any;
   mysub: Subscription;
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private animeSearchService: AnimeService,
-              private http: HttpClient) {
-              }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private animeSearchService: AnimeService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(routeParams => {
-    this.animeSearchService.getAnimeByID(routeParams.id).subscribe((res: any) => {
-      console.log('Response: ' + res.data.Media);
-      this.anime = res.data.Media;
-      // tslint:disable-next-line:max-line-length
-      this.anime.averageScore = (this.anime.averageScore / 10);
-      // tslint:disable-next-line:max-line-length
-      this.anime.description = this.anime.description.replace(/(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)/g, '');
-  });
+    this.route.params.subscribe((routeParams) => {
+      this.animeSearchService
+        .getAnimeByID(routeParams.id)
+        .subscribe((res: any) => {
+          console.log('Response: ' + res.data.Media);
+          this.anime = res.data.Media;
+          // tslint:disable-next-line:max-line-length
+          this.anime.averageScore = this.anime.averageScore / 10;
+          // tslint:disable-next-line:max-line-length
+          this.anime.description = this.anime.description.replace(
+            /(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)|(<|&lt;)<|<\/b>|\s*\/*(>&gt;)|(<|&lt;)<|<b>|\s*\/*(>&gt;)/g,
+            ''
+          );
+        });
 
-    console.log("routeParams" + JSON.stringify(routeParams.id));
-    console.log("routeParamsresult" + JSON.stringify(this.animeSearchService.getAnimeByID(routeParams.id)));
-  });
+      console.log('routeParams' + JSON.stringify(routeParams.id));
+      console.log(
+        'routeParamsresult' +
+          JSON.stringify(this.animeSearchService.getAnimeByID(routeParams.id))
+      );
+    });
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 
   animelist() {
-    console.log("array" + JSON.stringify(this.anime));
-    console.log("param" + this.param);
-
+    console.log('array' + JSON.stringify(this.anime));
+    console.log('param' + this.param);
   }
 
+  getAnimeStudiosName(studios: Studios) {
+    if (!isEmpty(studios.nodes)) {
+      const studioMap = map(studios.nodes, (node) => {
+        return node.name;
+      });
+
+      return studioMap.toString();
+    }
+  }
+
+  getMonthAsText(month: number) {
+    switch (month) {
+      case 1: {
+        return 'January';
+      }
+      case 2: {
+        return 'February';
+      }
+      case 3: {
+        return 'March';
+      }
+      case 4: {
+        return 'April';
+      }
+      case 5: {
+        return 'May';
+      }
+      case 6: {
+        return 'June';
+      }
+      case 7: {
+        return 'July';
+      }
+      case 8: {
+        return 'August';
+      }
+      case 9: {
+        return 'September';
+      }
+      case 10: {
+        return 'October';
+      }
+      case 11: {
+        return 'November';
+      }
+      case 12: {
+        return 'December';
+      }
+    }
+  }
 }

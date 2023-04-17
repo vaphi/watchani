@@ -149,6 +149,11 @@ export class AnimeService {
                 genres
                 description
                 status
+                studios {
+                  nodes{
+                    name
+                  }
+                }
                 characters {
                   nodes {
                     id
@@ -192,6 +197,27 @@ export class AnimeService {
                   large
                   medium
                   color
+                }
+                characters{
+                  nodes{
+                    name {
+                      first
+                      middle
+                      last
+                      full
+                    }
+                    gender
+                    dateOfBirth {
+                      year
+                      month
+                      day
+                    }
+                    age
+                    image {
+                      large
+                      medium
+                    }
+                  }
                 }
               }
             }`;

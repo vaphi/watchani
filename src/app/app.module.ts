@@ -12,12 +12,10 @@ import { NavBarComponent } from './components/anime-navbar/page-header.component
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-  ],
+  declarations: [AppComponent, NavBarComponent],
   imports: [
     SharedModule,
     BrowserModule,
@@ -25,15 +23,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AppRoutingModule,
     MatInputModule,
     MatPaginatorModule,
-    RouterModule.forRoot([
-      { path: 'home', component: HomePageComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: '**', redirectTo: 'home', pathMatch: 'full' }
-    ], { relativeLinkResolution: 'legacy' }),
+    MatIconModule,
+    RouterModule.forRoot(
+      [
+        { path: 'home', component: HomePageComponent },
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
+        { path: '**', redirectTo: 'home', pathMatch: 'full' },
+      ],
+      { relativeLinkResolution: 'legacy' }
+    ),
     AnimeSearchModule,
     BrowserAnimationsModule,
   ],
   providers: [AnimeService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

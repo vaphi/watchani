@@ -1,4 +1,5 @@
 .detail-container {
+    font-family: monospace;
     height: 100%;
     display: flex;
     margin: 1% 3%;
@@ -20,6 +21,7 @@
     .right-side {
         flex-basis: 85%;
         margin-left: 1%;
+        overflow-y: auto;
         .anime-header {
             width: 100%;
             display: flex;
@@ -37,7 +39,24 @@
         }
         .anime-summary {
         }
-        .anime-charactors {
+        .anime-characters {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
     }
+}
+
+.mini-info {
+    font-weight: bold;
+}
+
+.anime-characters {
+    display: flex;
+    flex-direction: row;
+}
+
+.character-container {
+    display: flex;
+    flex-direction: column;
 }

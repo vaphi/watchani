@@ -28,7 +28,7 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
   displayedColumns: string[] = ['cover', 'desc', 'rating'];
 
   private anime: any;
-  private searchTerm: string;
+  searchTerm: string = null;
 
   dataSource = new MatTableDataSource<any>();
 
@@ -46,7 +46,7 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
 
     this.dataSource.data = this.animes;
     this.dataSource.paginator = this.paginator;
-    this.paginator.pageSize = 25;
+    this.paginator.pageSize = 10;
   }
 
   ngOnDestroy(): void {
@@ -86,7 +86,7 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
     this.animes.forEach((anime: any) => {
       // tslint:disable-next-line:max-line-length
       if (!isNil(anime.description)) {
-        anime.description = anime.description.replace(/(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)/gm, '');
+        anime.description = anime.description.replace(/(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)|(<|&lt;)<|<\/b>|\s*\/*(>&gt;)|(<|&lt;)<|<b>|\s*\/*(>&gt;)/gm, '');
       }
 
       anime.avgScore = (anime.averageScore / 10);

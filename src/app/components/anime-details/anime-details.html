@@ -3,29 +3,66 @@
     <div class="anime-cover">
       <img class="detail-anime-cover" alt="poster" src={{anime.coverImage.extraLarge}}>
     </div>
-    <div class="alt-anime-name">
-
+    <div *ngIf="anime.status" class="type">
+      <label class="mini-info">Status:</label> {{anime.status}}
     </div>
-    <div class="anime-info">
-
+    <div *ngIf="anime.endDate" class="anime-finished">
+      <label class="mini-info">Finished:</label> {{getMonthAsText(anime.endDate.month)}} {{anime.endDate.day ?
+      anime.endDate.day
+      +'th' : ''}}
+      {{anime.endDate.year}}
+    </div>
+    <div *ngIf="anime.type" class="type">
+      <span>
+        <label class="mini-info">Type:</label> {{anime.type}}
+      </span>
+    </div>
+    <div *ngIf="anime.episodes" class="anime-episodes">
+      <span>
+        <label class="mini-info">Episodes:</label> {{anime.episodes}}
+      </span>
+    </div>
+    <div *ngIf="anime.volumes" class="anime-volumes">
+      <span>
+        <label class="mini-info">Volumes:</label> {{anime.volumes}}
+      </span>
+    </div>
+    <div *ngIf="anime.studios.nodes && anime.studios.nodes.length > 0" class="anime-studio">
+      <span>
+        <label class="mini-info">Studios:</label> {{getAnimeStudiosName(anime.studios)}}
+      </span>
+    </div>
+    <div class="anime-running-date">
+      <span>
+        <label class="mini-info">Air/Release Date:</label>
+        {{anime.startDate.month}}/{{anime.startDate.day}}/{{anime.startDate.year}} -
+        {{anime.endDate.month}}/{{anime.endDate.day}}/{{anime.endDate.year}}
+      </span>
     </div>
   </div>
 
   <div class="right-side">
     <div class="anime-header">
       <div class="anime-titles">
-        <h4>{{anime.title.english}}</h4>
-        <p>{{anime.title.romaji}}</p>
+        <h3>{{anime.title.english}}</h3>
+        <h4>{{anime.title.romaji}}</h4>
       </div>
       <div class="anime-rating">
-        {{anime.averageScore}}
+        Rating: {{anime.averageScore}}
       </div>
     </div>
     <div class="anime-summary">
       <p>{{anime.description}}</p>
     </div>
-    <div class="anime-charactors">
-
+    <div class="anime-characters">
+      <div *ngFor="let character of anime.characters.nodes; index as i; first as isFirst">
+        <div class="character-container">
+          <div class="character-img">
+            <img class="character-img-poster" alt="poster" src={{character.image.medium}}>
+          </div>
+          <div class="character-name-container">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
