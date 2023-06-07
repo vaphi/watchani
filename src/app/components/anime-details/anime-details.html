@@ -53,11 +53,11 @@
         <h4>{{anime.title.romaji}}</h4>
       </div>
       <div class="anime-rating">
-        Rating: {{anime.averageScore}}
+        <b>Rating:</b> {{anime.averageScore}}
       </div>
     </div>
     <div *ngIf="anime.trailer" class="anime-trailer">
-      <label>Trailer: <a href="javascript:void(0)"
+      <label><b>Trailer:</b> <a href="javascript:void(0)"
           (click)="goToTrailerLink(getAnimeTrailer(anime.trailer))">{{anime.trailer.site}}</a></label>
     </div>
     <div class="anime-summary">

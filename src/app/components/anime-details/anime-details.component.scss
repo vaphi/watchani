@@ -14,7 +14,6 @@
 
 .detail-container {
     font-family: monospace;
-    height: 100%;
     display: flex;
     margin: 1% 3%;
 
@@ -112,4 +111,10 @@
 
 .character-title {
     margin-top: 1%;
+}
+
+.rec-img-poster {
+    &:hover {
+        cursor: pointer;
+    }
 }
