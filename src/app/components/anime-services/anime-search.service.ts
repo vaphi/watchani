@@ -149,6 +149,7 @@ export class AnimeService {
                 genres
                 description
                 status
+                bannerImage
                 studios {
                   nodes{
                     name
@@ -216,6 +217,38 @@ export class AnimeService {
                     image {
                       large
                       medium
+                    }
+                  }
+                }
+                trailer{
+                  id
+                  site
+                  thumbnail
+                }
+                recommendations{
+                  nodes{
+                    id
+                    mediaRecommendation {
+                      id
+                      status
+                      averageScore
+                      bannerImage
+                      episodes
+                          type
+                          genres
+                          title {
+                            english,
+                            native,
+                            romaji
+                          }
+                      description
+                      status
+                      coverImage {
+                      extraLarge
+                      large
+                      medium
+                      color
+                    }
                     }
                   }
                 }

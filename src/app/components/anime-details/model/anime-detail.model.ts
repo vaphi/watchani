@@ -16,6 +16,9 @@ export interface AnimeDetailsModel {
   endDate: DetailDate;
   title: animeTitle;
   coverImage: AnimeCoverImage;
+  trailer: MediaTrailer;
+  bannerImage: string;
+  recommendations: Recommendation;
 }
 
 export interface Studios {
@@ -68,4 +71,32 @@ export interface AnimeCoverImage {
   large: string;
   medium: string;
   color: string;
+}
+
+export interface MediaTrailer {
+  id: string;
+  site: string;
+  thumbnail: string;
+}
+
+export interface Recommendation {
+  nodes: RecommendationNodes[];
+}
+
+export interface RecommendationNodes {
+  id: number;
+  mediaRecommendation: Media;
+}
+
+export interface Media {
+  id: number;
+  status: string;
+  averageScore: number;
+  bannerImage: string;
+  episodes: number;
+  type: string;
+  genres: string[];
+  title: animeTitle;
+  description: string;
+  coverImage: AnimeCoverImage;
 }

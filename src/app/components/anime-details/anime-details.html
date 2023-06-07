@@ -39,30 +39,61 @@
         {{anime.endDate.month}}/{{anime.endDate.day}}/{{anime.endDate.year}}
       </span>
     </div>
+    <div *ngIf="anime.genres && anime.genres.length > 0" class="anime-genres">
+      <span>
+        <label class="mini-info">Genres:</label> {{getAnimeGenres(anime.genres)}}
+      </span>
+    </div>
   </div>
 
   <div class="right-side">
     <div class="anime-header">
       <div class="anime-titles">
-        <h3>{{anime.title.english}}</h3>
+        <h2>{{anime.title.english}}</h2>
         <h4>{{anime.title.romaji}}</h4>
       </div>
       <div class="anime-rating">
         Rating: {{anime.averageScore}}
       </div>
     </div>
+    <div *ngIf="anime.trailer" class="anime-trailer">
+      <label>Trailer: <a href="javascript:void(0)"
+          (click)="goToTrailerLink(getAnimeTrailer(anime.trailer))">{{anime.trailer.site}}</a></label>
+    </div>
     <div class="anime-summary">
       <p>{{anime.description}}</p>
     </div>
+
+    <h2 class="character-title">Characters</h2>
     <div class="anime-characters">
-      <div *ngFor="let character of anime.characters.nodes; index as i; first as isFirst">
-        <div class="character-container">
-          <div class="character-img">
-            <img class="character-img-poster" alt="poster" src={{character.image.medium}}>
-          </div>
-          <div class="character-name-container">
-          </div>
+      <div class="character-container" *ngFor="let character of anime.characters.nodes; index as i; first as isFirst">
+        <div class="character-img">
+          <img class="character-img-poster" alt="poster" src={{character.image.medium}}>
+        </div>
+        <div class="character-name-container">
+          <p class="character-name">{{character.name.full}}</p>
+          <p>{{character.age}}</p>
+          <p>{{character.gender}}</p>
         </div>
       </div>
     </div>
+
+    <ng-container *ngIf="animeRecs.length > 0">
+      <h2 class="rec-title">Recommendations</h2>
+      <div class="anime-recs">
+        <div class="recs-container" *ngFor="let rec of animeRecs; index as i; first as isFirst">
+          <div class="rec-img">
+            <img [routerLink]="['/animeSearch', rec.id]" class="rec-img-poster" alt="poster"
+              src={{rec.coverImage.medium}}>
+          </div>
+          <div class="rec-name-container">
+            <p *ngIf="rec.title.english; else altTitle" class="rec-name">{{rec.title.english}}</p>
+            <ng-template #altTitle>
+              <p class="rec-name">{{rec.title.romaji}}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
   </div>

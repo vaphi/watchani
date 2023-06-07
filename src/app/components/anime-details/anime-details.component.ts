@@ -3,16 +3,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AnimeService } from '../anime-services/anime-search.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AnimeDetailsModel, Studios } from './model/anime-detail.model';
-import { isEmpty, map } from 'lodash';
+import {
+  AnimeDetailsModel,
+  CharacterNodes,
+  Media,
+  MediaTrailer,
+  Studios,
+} from './model/anime-detail.model';
+import { isEmpty, isNil, map } from 'lodash';
 
 @Component({
+  selector: 'anime-details-component',
   templateUrl: './anime-details.html',
   styleUrls: ['./anime-details.component.scss'],
 })
 export class AnimeDetailsComponent implements OnInit, OnDestroy {
   animeTitle: string = 'blank';
   anime: AnimeDetailsModel;
+  animeRecs: Media[] = [];
   aniID: any;
   param: any;
   mysub: Subscription;
@@ -30,6 +38,19 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy {
         .subscribe((res: any) => {
           console.log('Response: ' + res.data.Media);
           this.anime = res.data.Media;
+          if (
+            !isNil(this.anime.recommendations.nodes) &&
+            this.anime.recommendations.nodes.length > 0
+          ) {
+            const animeRecsMap = map(
+              this.anime.recommendations.nodes,
+              (node) => {
+                return node.mediaRecommendation;
+              }
+            );
+            this.animeRecs = this.getRandomRecs(animeRecsMap, 10);
+          }
+
           // tslint:disable-next-line:max-line-length
           this.anime.averageScore = this.anime.averageScore / 10;
           // tslint:disable-next-line:max-line-length
@@ -62,6 +83,45 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy {
 
       return studioMap.toString();
     }
+  }
+
+  getAnimeGenres(genres: string[]) {
+    if (!isEmpty(genres)) {
+      const genresMap = map(genres, (genre) => {
+        return genre;
+      });
+
+      return genresMap.toString();
+    }
+  }
+
+  getAnimeTrailer(trailer: MediaTrailer) {
+    if (!isNil(trailer) && !isNil(trailer.id)) {
+      return `https://youtube.com/watch?v=${trailer.id}`;
+    }
+  }
+
+  goToTrailerLink(trailerLink: string) {
+    window.open(trailerLink, '_blank');
+  }
+
+  getRandomRecs(medias: Media[], maxRecs: number) {
+
+    let len = medias.length;
+
+    if (maxRecs > len) {
+      maxRecs = medias.length;
+    }
+
+    let result: Media[] = new Array(maxRecs);
+    const taken = new Array(len);
+
+    while (maxRecs--) {
+      var x = Math.floor(Math.random() * len);
+      result[maxRecs] = medias[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
   }
 
   getMonthAsText(month: number) {
