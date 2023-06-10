@@ -83,6 +83,12 @@
     height: 93vh;
 }
 
+::ng-deep anime-random-component {
+    overflow-y: scroll;
+    display: flex;
+    height: 93vh;
+}
+
 .character-name {
     font-weight: bold;
 }
