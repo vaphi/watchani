@@ -1,48 +1,48 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AnimeService } from '../anime-services/anime-search.service';
 import { Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { isEmpty, isNil, map } from 'lodash';
 import {
   AnimeDetailsModel,
-  CharacterNodes,
   Media,
   MediaTrailer,
   Studios,
-} from './model/anime-detail.model';
-import { isEmpty, isNil, map } from 'lodash';
+} from '../anime-details/model/anime-detail.model';
+import { finalize } from 'rxjs/operators';
+import { MediaType } from '../anime-services/model/anime.model';
 
 @Component({
-  selector: 'anime-details-component',
-  templateUrl: './anime-details.html',
-  styleUrls: ['./anime-details.component.scss'],
+  selector: 'anime-random-component',
+  templateUrl: './anime-random.html',
+  styleUrls: ['../anime-details/anime-details.component.scss'],
 })
-export class AnimeDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AnimeRandomComponent implements OnInit, OnDestroy, AfterViewInit {
   animeTitle: string = 'blank';
   anime: AnimeDetailsModel;
   animeRecs: Media[] = [];
   aniID: any;
   param: any;
-  mysub: Subscription;
+  animeSubscribe: Subscription;
   isLoading = false;
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private animeSearchService: AnimeService,
-    private http: HttpClient
-  ) {}
+  constructor(private animeSearchService: AnimeService) {
+  }
 
   ngOnInit() {
+    // pipe
     this.isLoading = true;
+
+    
   }
 
   ngAfterViewInit(): void {
-    this.route.params.subscribe((routeParams) => {
-      this.animeSearchService
-        .getAnimeByID(routeParams.id)
+    try {
+      const page = this.randomInteger(1, 345);
+      this.animeSubscribe = this.animeSearchService
+        .getRandomAnime(page)
         .subscribe((res: any) => {
-          console.log('Response: ' + res.data.Media);
-          this.anime = res.data.Media;
+          console.log('Response: ' + res.data.Page.media);
+          const medias = res.data.Page.media;
+          this.anime = medias[this.randomInteger(0, 49)];
           if (
             !isNil(this.anime.recommendations.nodes) &&
             this.anime.recommendations.nodes.length > 0
@@ -59,19 +59,20 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
           // tslint:disable-next-line:max-line-length
           this.anime.averageScore = this.anime.averageScore / 10;
           // tslint:disable-next-line:max-line-length
-          this.anime.description = this.anime.description.replace(
-            /(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)|(<|&lt;)<|<\/b>|\s*\/*(>&gt;)|(<|&lt;)<|<b>|\s*\/*(>&gt;)/g,
-            ''
-          );
+          this.anime.description = this.anime?.description
+            ? this.anime?.description.replace(
+                /(<|&lt;)br\s*\/*(>|&gt;)|(<|&lt;)i\s*\/*(>|&gt;)|(<|&lt;)\s*\/*br(>|&gt;)|(<|&lt;)\s*\/*i(>|&gt;)|(<|&lt;)<|<\/b>|\s*\/*(>&gt;)|(<|&lt;)<|<b>|\s*\/*(>&gt;)/g,
+                ''
+              )
+            : '';
         });
+    } catch (error) {
+    } finally {
       this.isLoading = false;
-    });
+    }
   }
-  ngOnDestroy(): void {}
-
-  animelist() {
-    console.log('array' + JSON.stringify(this.anime));
-    console.log('param' + this.param);
+  ngOnDestroy(): void {
+    this.animeSubscribe.unsubscribe();
   }
 
   getAnimeStudiosName(studios: Studios) {
@@ -120,6 +121,10 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       taken[x] = --len in taken ? taken[len] : len;
     }
     return result;
+  }
+
+  randomInteger(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   getMonthAsText(month: number) {

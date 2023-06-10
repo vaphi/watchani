@@ -8,6 +8,7 @@
         <ul class='nav-link-container'>
           <button class="nav-item" routerLinkActive='active' [routerLink]="['/home']">Home</button>
           <button class="nav-item" routerLinkActive='active' [routerLink]="['/animeSearch']">Search</button>
+          <button class="nav-item" (click)="refreshPage()" routerLinkActive='active' [routerLink]="['/random']">Random Anime</button>
         </ul>
       </nav>
     </div>

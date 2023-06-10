@@ -8,6 +8,7 @@ import { MatPaginatorModule } from '@angular/material/paginator/';
 import { MatTableModule } from '@angular/material/table';
 import { LoadingIconComponent } from './components/anime-shared/loading-icon/loading-icon.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AnimeRandomComponent } from './components/anime-random/anime-random.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     StarRatingComponent,
     BarRatingComponent,
-    LoadingIconComponent
+    LoadingIconComponent,
+    AnimeRandomComponent
   ],
   exports: [
     BarRatingComponent,
@@ -29,6 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     MatTableModule,
     MatButtonModule,
+    AnimeRandomComponent
   ]
 })
 export class SharedModule { }

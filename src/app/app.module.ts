@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
+import { AnimeRandomComponent } from './components/anime-random/anime-random.component';
 
 @NgModule({
   declarations: [AppComponent, NavBarComponent],
@@ -27,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
     RouterModule.forRoot(
       [
         { path: 'home', component: HomePageComponent },
+        { path: 'random', component: AnimeRandomComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: '**', redirectTo: 'home', pathMatch: 'full' },
       ],
