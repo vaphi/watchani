@@ -416,109 +416,37 @@ export class AnimeService {
   getTop100Animes(page: number) {
     let animes: any;
     const query = `query($page: Int){
-            Page (page: $page) {
-              pageInfo {
-                total
-                currentPage
-                lastPage
-                hasNextPage
-                perPage
-              }
-              media (isAdult: false, Type: ANIME, SORT: SCORE_DESC) {
-                id
-                status
-                averageScore
-                bannerImage
-                episodes
-                type
-                genres
-                startDate {
-                  year
-                  month
-                  day
-                }
-                endDate {
-                  year
-                  month
-                  day
-                }
-                title {
-                  english,
-                  native,
-                  romaji
-                }
-      			    description
-      			    status
-                coverImage {
-                  extraLarge
-                  large
-                  medium
-                  color
-                }
-      		      studios {
-      		        nodes{
-                    name
-                  }
-      		      }
-                characters{
-                  nodes{
-                    name {
-                      first
-                      middle
-                      last
-                      full
-                    }
-                    gender
-                    dateOfBirth {
-                      year
-                      month
-                      day
-                    }
-                    age
-                    image {
-                      large
-                      medium
-                    }
-                  }
-                }
-                trailer{
-                  id
-                  site
-                  thumbnail
-                }
-                recommendations{
-                  nodes{
-                    id
-                    media {
-                      id
-                    }
-                    mediaRecommendation {
-                      id
-                      status
-                      averageScore
-                      bannerImage
-                      episodes
-                          type
-                          genres
-                          title {
-                            english,
-                            native,
-                            romaji
-                          }
-                      description
-                      status
-                      coverImage {
-                      extraLarge
-                      large
-                      medium
-                      color
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }`;
+      Page (page: $page) {
+        pageInfo {
+          total
+          currentPage
+          lastPage
+          hasNextPage
+          perPage
+        }
+        media (isAdult: false, type: ANIME, sort: SCORE_DESC) {
+          id
+      status
+      averageScore
+      episodes
+          type
+          genres
+          title {
+            english,
+            native,
+            romaji
+          }
+      description
+      status
+      coverImage {
+      extraLarge
+      large
+      medium
+      color
+      }
+        }
+      }
+    }`;
     const variables = {
       page: page ? page : 1,
     };

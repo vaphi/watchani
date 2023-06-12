@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AnimeService } from '../anime-services/anime-search.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { isNil } from 'lodash';
 
 @Component({
@@ -33,24 +32,16 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
   dataSource = new MatTableDataSource<any>();
 
   ngOnInit(): void {
-
-    // this.searchSub$.pipe(
-    //   debounceTime(500), // discard emitted values that take less than the specified time between output
-    //   distinctUntilChanged() // only emit when value has changed
-    // ).subscribe(word => {
-    //   this.searchTerm = word;
-    // });
   }
 
   ngAfterViewInit(): void {
 
     this.dataSource.data = this.animes;
     this.dataSource.paginator = this.paginator;
-    this.paginator.pageSize = 10;
+    this.paginator.pageSize = 20
   }
 
   ngOnDestroy(): void {
-    // this.searchSub$.unsubscribe();
   }
 
   initGrid(): boolean {

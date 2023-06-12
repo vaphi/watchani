@@ -93,7 +93,7 @@
         <div class="anime-recs">
           <div class="recs-container" *ngFor="let rec of animeRecs; index as i; first as isFirst">
             <div class="rec-img">
-              <img [routerLink]="['/animeSearch', rec.id]" class="rec-img-poster" alt="poster"
+              <img *ngIf="rec?.coverImage?.medium" (click)="goToAnime(rec.id)" class="rec-img-poster" alt="poster"
                 src={{rec.coverImage.medium}}>
             </div>
             <div class="rec-name-container">

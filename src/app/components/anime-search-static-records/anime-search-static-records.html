@@ -1,23 +1,5 @@
 <div class="search-container">
-  <div class="search-bar">
-    <div class="search-button">
-      <button mat-raised-button (click)="animesSearch()">Search</button>
-    </div>
-    <div class="search">
-      <input #searchInput className="search-bar" placeholder="Please enter anime name" (change)="searchChange($event)"
-        (keydown.enter)="onEnterSearch($event)" value="">
-    </div>
-  </div>
-
   <div class="anime-grid mat-elevation-z8">
-
-    <div *ngIf="searchTerm === null" class="empty-search-container">
-      <div class="search-notice">
-        <i class="material-icons search-icon">search</i>
-        <p class="search-text">Please Enter Anime Name In the Search Bar</p>
-
-      </div>
-    </div>
 
     <div *ngIf="isLoading" class="table-loading-container">
       <div class="loading-spinner">
@@ -25,7 +7,7 @@
       </div>
     </div>
 
-    <div *ngIf="!isLoading && searchTerm !== null" class="anime-table-container">
+    <div *ngIf="!isLoading" class="anime-table-container">
 
       <table mat-table [dataSource]="dataSource" class="anime-table" matSort matSortActive="created" matSortDisableClear
         matSortDirection="desc">
@@ -33,7 +15,7 @@
         <ng-container matColumnDef="cover">
           <th class="grid-header-column" mat-header-cell *matHeaderCellDef></th>
           <td class="anime-cover" mat-cell *matCellDef="let row"><img class="card-img-top" id="poster-img" alt="poster"
-              [routerLink]="['/animeSearch', row.id]" src={{row.coverImage.large}}></td>
+              (click)="goToAnime(row.id)" src={{row.coverImage.large}}></td>
         </ng-container>
 
         <!-- Title Column -->
@@ -70,7 +52,7 @@
       </table>
     </div>
 
-    <mat-paginator [ngClass]="{ hiddenElement: !(!isLoading && searchTerm !== null) }" [showFirstLastButtons]="true"
+    <mat-paginator [ngClass]="{ hiddenElement: !(!isLoading) }" [showFirstLastButtons]="true"
       [pageSizeOptions]="[10, 20, 30, 40, 50]" [length]="resultsLength"
       aria-label="Select page of GitHub search results">
     </mat-paginator>

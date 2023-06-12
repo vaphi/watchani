@@ -9,11 +9,11 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RouterModule } from '@angular/router';
 import { AnimeService } from './components/anime-services/anime-search.service';
 import { NavBarComponent } from './components/anime-navbar/page-header.component';
-import { MatInputModule } from '@angular/material/input';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatIconModule } from '@angular/material/icon';
+
 import { AnimeRandomComponent } from './components/anime-random/anime-random.component';
+import { AnimeSearchStaticRecordsComponent } from './components/anime-search-static-records/anime-search-static-records.component';
 
 @NgModule({
   declarations: [AppComponent, NavBarComponent],
@@ -22,13 +22,11 @@ import { AnimeRandomComponent } from './components/anime-random/anime-random.com
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatIconModule,
     RouterModule.forRoot(
       [
         { path: 'home', component: HomePageComponent },
         { path: 'random', component: AnimeRandomComponent },
+        { path: 'top100Anime', component: AnimeSearchStaticRecordsComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: '**', redirectTo: 'home', pathMatch: 'full' },
       ],

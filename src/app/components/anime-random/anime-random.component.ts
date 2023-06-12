@@ -8,8 +8,7 @@ import {
   MediaTrailer,
   Studios,
 } from '../anime-details/model/anime-detail.model';
-import { finalize } from 'rxjs/operators';
-import { MediaType } from '../anime-services/model/anime.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'anime-random-component',
@@ -24,14 +23,15 @@ export class AnimeRandomComponent implements OnInit, OnDestroy, AfterViewInit {
   param: any;
   animeSubscribe: Subscription;
   isLoading = false;
-  constructor(private animeSearchService: AnimeService) {
-  }
+
+  constructor(
+    private animeSearchService: AnimeService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // pipe
     this.isLoading = true;
-
-    
   }
 
   ngAfterViewInit(): void {
@@ -73,6 +73,10 @@ export class AnimeRandomComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   ngOnDestroy(): void {
     this.animeSubscribe.unsubscribe();
+  }
+
+  goToAnime(recId: number) {
+    this.router.navigate([`/animeSearch/${recId}`]);
   }
 
   getAnimeStudiosName(studios: Studios) {
