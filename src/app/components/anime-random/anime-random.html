@@ -14,7 +14,7 @@
         <label class="mini-info">Status:</label> {{anime.status}}
       </div>
       <div *ngIf="anime.endDate" class="anime-finished">
-        <label class="mini-info">Finished:</label> {{getMonthAsText(anime.endDate.month)}} {{anime.endDate.day ?
+        <label class="mini-info">Finished:</label> {{animeDetailService.getMonthAsText(anime.endDate.month)}} {{anime.endDate.day ?
         anime.endDate.day
         +'th' : ''}}
         {{anime.endDate.year}}
@@ -36,7 +36,7 @@
       </div>
       <div *ngIf="anime.studios.nodes && anime.studios.nodes.length > 0" class="anime-studio">
         <span>
-          <label class="mini-info">Studios:</label> {{getAnimeStudiosName(anime.studios)}}
+          <label class="mini-info">Studios:</label> {{animeDetailService.getAnimeStudiosName(anime.studios)}}
         </span>
       </div>
       <div class="anime-running-date">
@@ -48,7 +48,7 @@
       </div>
       <div *ngIf="anime.genres && anime.genres.length > 0" class="anime-genres">
         <span>
-          <label class="mini-info">Genres:</label> {{getAnimeGenres(anime.genres)}}
+          <label class="mini-info">Genres:</label> {{animeDetailService.getAnimeGenres(anime.genres)}}
         </span>
       </div>
     </div>
@@ -65,7 +65,7 @@
       </div>
       <div *ngIf="anime.trailer" class="anime-trailer">
         <label><b>Trailer:</b> <a href="javascript:void(0)"
-            (click)="goToTrailerLink(getAnimeTrailer(anime.trailer))">{{anime.trailer.site}}</a></label>
+            (click)="animeDetailService.goToTrailerLink(animeDetailService.getAnimeTrailer(anime.trailer))">{{anime.trailer.site}}</a></label>
       </div>
       <div class="anime-summary">
         <p>{{anime.description}}</p>

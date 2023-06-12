@@ -5,12 +5,12 @@ import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {
   AnimeDetailsModel,
-  CharacterNodes,
   Media,
   MediaTrailer,
   Studios,
 } from './model/anime-detail.model';
 import { isEmpty, isNil, map } from 'lodash';
+import { AnimeDetailService } from './anime-details.service';
 
 @Component({
   selector: 'anime-details-component',
@@ -23,13 +23,12 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   animeRecs: Media[] = [];
   aniID: any;
   param: any;
-  mysub: Subscription;
+  routeSubscribe: Subscription;
   isLoading = false;
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private animeSearchService: AnimeService,
-    private http: HttpClient
+    private animeDetailService: AnimeDetailService
   ) {}
 
   ngOnInit() {
@@ -37,7 +36,14 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.route.params.subscribe((routeParams) => {
+    this.routeSubscribe = this.getRouterParamsSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscribe.unsubscribe();
+  }
+  private getRouterParamsSubscription(): Subscription {
+    return this.route.params.subscribe((routeParams) => {
       this.animeSearchService
         .getAnimeByID(routeParams.id)
         .subscribe((res: any) => {
@@ -53,7 +59,7 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 return node.mediaRecommendation;
               }
             );
-            this.animeRecs = this.getRandomRecs(animeRecsMap, 10);
+            this.animeRecs = this.animeDetailService.getRandomRecs(animeRecsMap, 10);
           }
 
           // tslint:disable-next-line:max-line-length
@@ -67,99 +73,6 @@ export class AnimeDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isLoading = false;
     });
   }
-  ngOnDestroy(): void {}
 
-  animelist() {
-    console.log('array' + JSON.stringify(this.anime));
-    console.log('param' + this.param);
-  }
 
-  getAnimeStudiosName(studios: Studios) {
-    if (!isEmpty(studios.nodes)) {
-      const studioMap = map(studios.nodes, (node) => {
-        return node.name;
-      });
-
-      return studioMap.toString();
-    }
-  }
-
-  getAnimeGenres(genres: string[]) {
-    if (!isEmpty(genres)) {
-      const genresMap = map(genres, (genre) => {
-        return genre;
-      });
-
-      return genresMap.toString();
-    }
-  }
-
-  getAnimeTrailer(trailer: MediaTrailer) {
-    if (!isNil(trailer) && !isNil(trailer.id)) {
-      return `https://youtube.com/watch?v=${trailer.id}`;
-    }
-  }
-
-  goToTrailerLink(trailerLink: string) {
-    window.open(trailerLink, '_blank');
-  }
-
-  getRandomRecs(medias: Media[], maxRecs: number) {
-    let len = medias.length;
-
-    if (maxRecs > len) {
-      maxRecs = medias.length;
-    }
-
-    let result: Media[] = new Array(maxRecs);
-    const taken = new Array(len);
-
-    while (maxRecs--) {
-      var x = Math.floor(Math.random() * len);
-      result[maxRecs] = medias[x in taken ? taken[x] : x];
-      taken[x] = --len in taken ? taken[len] : len;
-    }
-    return result;
-  }
-
-  getMonthAsText(month: number) {
-    switch (month) {
-      case 1: {
-        return 'January';
-      }
-      case 2: {
-        return 'February';
-      }
-      case 3: {
-        return 'March';
-      }
-      case 4: {
-        return 'April';
-      }
-      case 5: {
-        return 'May';
-      }
-      case 6: {
-        return 'June';
-      }
-      case 7: {
-        return 'July';
-      }
-      case 8: {
-        return 'August';
-      }
-      case 9: {
-        return 'September';
-      }
-      case 10: {
-        return 'October';
-      }
-      case 11: {
-        return 'November';
-      }
-      case 12: {
-        return 'December';
-      }
-    }
-  }
 }
