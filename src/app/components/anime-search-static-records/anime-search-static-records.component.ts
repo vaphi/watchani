@@ -13,7 +13,7 @@ import { isNil } from 'lodash';
 import { Router } from '@angular/router';
 @Component({
   templateUrl: './anime-search-static-records.html',
-  styleUrls: ['./anime-search-static-records.component.scss'],
+  styleUrls: ['../anime-search/anime-search.component.scss'],
 })
 export class AnimeSearchStaticRecordsComponent
   implements OnInit, AfterViewInit, OnDestroy
@@ -69,7 +69,7 @@ export class AnimeSearchStaticRecordsComponent
         .subscribe((res: any) => {
           this.animes = [...this.animes, ...res.data.Page.media];
 
-          if (i === 2) {
+          if (this.animes.length === 100) {
             this.animes.forEach((anime: any) => {
               // tslint:disable-next-line:max-line-length
               if (!isNil(anime.description)) {
