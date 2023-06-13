@@ -23,12 +23,21 @@
 @media screen and (max-width: 375px) {
     .detail-container {
         flex-direction: column;
+        width: 94%;
+    }
+
+    .anime-genres {
+        word-wrap: break-word;
     }
 }
 
 @media screen and (max-width: 414px) {
     .detail-container {
         flex-direction: column;
+        width: 94%;
+    }
+    .anime-genres {
+        word-wrap: break-word;
     }
 }
 
