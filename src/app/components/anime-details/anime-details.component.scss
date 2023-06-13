@@ -12,6 +12,26 @@
     }
 }
 
+@media screen and (max-width: 1200px) {
+    .character-container {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 15%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .detail-container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .detail-container {
+        flex-direction: column;
+    }
+}
+
 .detail-container {
     font-family: monospace;
     display: flex;
@@ -32,7 +52,6 @@
         width: 60vw;
         flex-basis: 85%;
         margin-left: 1%;
-
         .anime-header {
             width: 100%;
             display: flex;
@@ -48,12 +67,47 @@
                 margin: auto;
             }
         }
+        @media screen and (max-width: 375px) {
+            .anime-header {
+                flex-direction: column;
+                margin-bottom: 5%;
+                .anime-rating {
+                    text-align: unset;
+                    margin: unset;
+                }
+            }
+        }
+
+        @media screen and (max-width: 414px) {
+            .anime-header {
+                flex-direction: column;
+                margin-bottom: 5%;
+                .anime-rating {
+                    text-align: unset;
+                    margin: unset;
+                }
+            }
+        }
+
         .anime-characters {
             display: flex;
             flex-direction: row;
             overflow-x: auto;
 
             @include scroll-bar;
+        }
+    }
+
+    
+    @media screen and (max-width: 414px) {
+        .right-side {
+            width: 94vw;
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        .right-side {
+            width: 94vw;
         }
     }
 }
@@ -67,14 +121,6 @@
     display: flex;
     flex-direction: column;
     flex-basis: 15%;
-}
-
-@media screen and (max-width: 1200px) {
-    .character-container {
-        display: flex;
-        flex-direction: column;
-        flex-basis: 15%;
-    }
 }
 
 ::ng-deep anime-details-component {
@@ -138,7 +184,7 @@
     -webkit-box-orient: vertical;
 }
 
-.detail-loading-container{
+.detail-loading-container {
     width: 100%;
     height: 93vh;
 

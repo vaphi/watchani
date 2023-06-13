@@ -1,45 +1,6 @@
-.title-container {
-    height: 7vh;
-}
-
-.title-container {
-    font-size: 2em;
-    display: flex;
-    align-items: center;
+.navbar {
     padding-left: 1%;
-
-    font-family: Titillium -webkit-body;
-    color: white;
 }
-
-.nav-bar-section {
-    display: flex;
-    background: #212529;
-}
-
-.col-sm {
-    padding-left: 2%;
-    margin: auto;
-}
-
-.nav-link-container {
-    display: flex;
-    margin: unset;
-    .nav-link {
-        text-decoration: unset;
-        color: white;
-        font-size: 1.2em;
-    }
-}
-
-.nav-item {
-    background: #212529;
-    border: none;
-    color: white;
-    font-size: 1.25em;
-    margin: 5px;
-
-    &:hover {
-        border-bottom: solid #a3b899 2px;
-    }
+.nav-link {
+    font-size: 1.15em;
 }

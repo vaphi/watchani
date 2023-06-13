@@ -53,6 +53,57 @@
     }
 }
 
+
+@media screen and (max-width: 375px) {
+    .anime-desc-container {
+        max-width: min-content;
+    }
+
+    .mat-header-cell.rating {
+        display: none;
+    }
+
+    .mat-cell.anime-rating {
+        display: none;
+    }
+
+    .mat-column-desc {
+        max-width: 250px;
+        min-width: 250px;
+    }
+
+    .anime-grid {
+        height: 85.75vh;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .anime-desc-container {
+        max-width: min-content;
+    }
+
+    .mat-header-cell.rating {
+        display: none;
+    }
+
+    .mat-cell.anime-rating {
+        display: none;
+    }
+
+    .mat-column-desc {
+        max-width: 200px;
+        min-width: 200px;
+    }
+
+    .anime-grid {
+        height: 85.75vh;
+    }
+
+    .tags {
+        word-wrap: break-word;
+    }
+}
+
 .anime-rating {
     text-align: center;
     width: 10%;
@@ -127,13 +178,13 @@
 }
 
 .anime-grid {
-    height: 95%;
+    height: 90vh;
     display: flex;
     flex-direction: column;
 }
 
 .anime-grid-top-100 {
-    height: 93vh;
+    height: 94vh;
     display: flex;
     flex-direction: column;
 }

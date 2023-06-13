@@ -61,18 +61,7 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
     this.isLoading = true;
 
     const data = await this.animeSearchService.getAnimePages(this.searchTerm);
-
-    // if (data.pageInfo.total > 50) {
-    //   this.animes = data.media;
-
-    //   for (let i = 2; i <= data.pageInfo.lastPage; i++) {
-
-    //     const data = await this.getAnime(i);
-    //     this.animes = this.animes.concat(data.media);
-    //   }
-    // } else {
     this.animes = data.media;
-    // }
 
     this.animes.forEach((anime: any) => {
       // tslint:disable-next-line:max-line-length
@@ -102,10 +91,6 @@ export class AppAnimeSearchComponent implements OnInit, AfterViewInit, OnDestroy
       this.searchTerm = this.searchInput.nativeElement.value;
     }
     this.animesSearch();
-  }
-
-  private async getAnime(page: number) {
-    return await this.animeSearchService.getAnimePages(this.searchTerm, page);
   }
 
   animeSearchID(id: number) {
